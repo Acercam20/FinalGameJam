@@ -86,6 +86,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Pause();
+    }
+
     private void Movement()
     {
         if (!(InputVector.magnitude > 0)) MoveDirection = Vector3.zero;

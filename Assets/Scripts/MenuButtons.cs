@@ -23,4 +23,9 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void OnResumeButtonPressed()
+    {
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().pauseCanvas.SetActive(false);
+    }
 }
