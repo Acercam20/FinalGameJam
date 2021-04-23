@@ -34,11 +34,12 @@ public class PlayerController : MonoBehaviour
 
     public InputActionAsset asset;
     private InputAction inputAction1;
-    private InputAction inputAction2;
-
     ButtonControl jumpControl;
+
+    private InputAction inputAction2;
     ButtonControl hookControl;
 
+    public GrapplingGun grappleHook;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -46,22 +47,33 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         rb.useGravity = false;
 
-        inputAction2 = asset.FindAction("Hook");
-        hookControl = (ButtonControl)inputAction2.controls[0];
-        inputAction2.Enable();
-
         inputAction1 = asset.FindAction("Run");
         jumpControl = (ButtonControl)inputAction1.controls[0];
         inputAction1.Enable();
+
+        inputAction2 = asset.FindAction("Hook");
+        hookControl = (ButtonControl)inputAction2.controls[0];
+        inputAction2.Enable();
     }
 
     void Update()
     {
-
+        OnHook();
         Running();
         Movement();
     }
-
+    public void OnHook()
+    {
+        if (hookControl.wasPressedThisFrame)
+        {
+            grappleHook.StartGrapple();
+        }
+        if (hookControl.wasReleasedThisFrame)
+        {
+            grappleHook.StopGrapple();
+        }
+        
+    }
     private void Running()
     {
         if (jumpControl.wasPressedThisFrame)
