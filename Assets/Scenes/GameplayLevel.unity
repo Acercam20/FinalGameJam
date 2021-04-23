@@ -5607,7 +5607,19 @@ MonoBehaviour:
     m_ActionId: c34428a2-734c-4726-bf2f-d761df836f04
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 300457840}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0419cb86-b043-481b-b7d9-09e03ecd21d6
     m_ActionName: Player/Pause[/Keyboard/p]
   - m_PersistentCalls:
@@ -5699,10 +5711,10 @@ MonoBehaviour:
   playerCamera: {fileID: 667416175}
   lookSpeed: 0.02
   lookXLimit: 45
-  JumpForce: 10
-  WalkSpeed: 4
-  RunSpeed: 8
-  gravityScale: 1
+  JumpForce: 8
+  WalkSpeed: 5
+  RunSpeed: 10
+  gravityScale: 1.8
   asset: {fileID: -944628639613478452, guid: 3c33fbc21f810574aae317fafe9e682f, type: 3}
   grappleHook: {fileID: 339143842}
 --- !u!95 &300457841
@@ -6682,6 +6694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519181064}
+  - component: {fileID: 519181065}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -6703,6 +6716,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519181065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519181063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c518557f6c4abd46b37fd7fbca53db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseCanvas: {fileID: 1288791591}
+  isPaused: 0
 --- !u!1 &525380594
 GameObject:
   m_ObjectHideFlags: 0
@@ -7988,12 +8015,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 914925543}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: OnResumeButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -31249,6 +31276,10 @@ PrefabInstance:
     - target: {fileID: 7681009091357771086, guid: 3c4a6c948cd17ed4092db53f32c2cc96, type: 3}
       propertyPath: m_Name
       value: HighGravShroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 7681009092685192473, guid: 3c4a6c948cd17ed4092db53f32c2cc96, type: 3}
+      propertyPath: m_Size.x
+      value: 2.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4a6c948cd17ed4092db53f32c2cc96, type: 3}

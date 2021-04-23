@@ -26,6 +26,6 @@ public class MenuButtons : MonoBehaviour
 
     public void OnResumeButtonPressed()
     {
-        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().pauseCanvas.SetActive(false);
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Pause(false);
     }
 }

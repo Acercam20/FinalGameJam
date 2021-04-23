@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody rb;
 
-    public float gravityScale = 1.0f;
-    public static float globalGravity = -8.81f;
+    public float gravityScale = 2.0f;
+    public static float globalGravity = -9.81f;
 
     public InputActionAsset asset;
     private InputAction inputAction1;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     public void Pause()
     {
-        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Pause();
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Pause(true);
     }
 
     private void Movement()

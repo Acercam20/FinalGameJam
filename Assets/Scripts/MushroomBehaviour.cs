@@ -24,16 +24,16 @@ public class MushroomBehaviour : MonoBehaviour
         {
             if (gravUp)
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = 1.7f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = 2.4f;
             }
             else if (gravRev)
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = -0.6f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = -0.8f;
                 other.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             else
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = 0.3f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = 0.4f;
             }
         }
     }
