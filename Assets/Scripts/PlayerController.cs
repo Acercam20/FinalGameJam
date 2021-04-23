@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.tag == "VictoryCheckpoint")
         {
+            Cursor.lockState = CursorLockMode.None;
             GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(7);
             GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Victory();
         }

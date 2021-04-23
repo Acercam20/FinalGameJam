@@ -8,6 +8,7 @@ public class MenuButtons : MonoBehaviour
     {
         GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(5);
         GameObject.FindWithTag("MusicManager").GetComponent<MusicManager>().changeMusic();
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("GameplayLevel");
     }
 
@@ -15,6 +16,12 @@ public class MenuButtons : MonoBehaviour
     {
         GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(5);
         SceneManager.LoadScene("Credits");
+    }
+
+    public void OnInstructionsButtonPressed()
+    {
+        GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(5);
+        SceneManager.LoadScene("Instructions");
     }
 
     public void OnExitButtonPressed()
@@ -27,6 +34,7 @@ public class MenuButtons : MonoBehaviour
     {
         GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(5);
         GameObject.FindWithTag("MusicManager").GetComponent<MusicManager>().changeMusic();
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("MainMenu");
     }
 
