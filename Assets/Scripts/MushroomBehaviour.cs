@@ -24,16 +24,19 @@ public class MushroomBehaviour : MonoBehaviour
         {
             if (gravUp)
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = 2.4f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = 2.8f;
+                GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(2);
             }
             else if (gravRev)
             {
                 other.gameObject.GetComponent<PlayerController>().gravityScale = -0.8f;
                 other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(4);
             }
             else
             {
                 other.gameObject.GetComponent<PlayerController>().gravityScale = 0.4f;
+                GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(3);
             }
         }
     }
@@ -42,7 +45,7 @@ public class MushroomBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().gravityScale = 1;
+            other.gameObject.GetComponent<PlayerController>().gravityScale = 1.4f;
         }
     }
 }

@@ -29,12 +29,15 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody rb;
 
-    public float gravityScale = 2.0f;
+    public float gravityScale = 1.4f;
     public static float globalGravity = -9.81f;
 
     public InputActionAsset asset;
     private InputAction inputAction1;
     ButtonControl jumpControl;
+
+    public AudioClip walkingSFX;
+    public AudioClip runningSFX;
 
     void Start()
     {
@@ -48,10 +51,23 @@ public class PlayerController : MonoBehaviour
         inputAction1.Enable();
 
     }
-
-    void Update()
+    private void Update()
     {
         Running();
+
+        if (!IsRunning)
+        {
+            playerAnimator.SetBool("isWalking", true);
+            playerAnimator.SetBool("isRunning", false);
+        }
+        else
+        {
+            playerAnimator.SetBool("isRunning", true);
+            playerAnimator.SetBool("isWalking", false);
+        }
+    }
+    void FixedUpdate()
+    {
         Movement();
     }
 
@@ -60,10 +76,14 @@ public class PlayerController : MonoBehaviour
         if (jumpControl.wasPressedThisFrame)
         {
             IsRunning = true;
+            gameObject.GetComponent<AudioSource>().clip = runningSFX;
+            gameObject.GetComponent<AudioSource>().Play();
         }
         if (jumpControl.wasReleasedThisFrame)
         {
             IsRunning = false;
+            gameObject.GetComponent<AudioSource>().clip = walkingSFX;
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -74,8 +94,10 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        if (!(InputVector.magnitude > 0)) MoveDirection = Vector3.zero;
-
+        if (!(InputVector.magnitude > 0))
+        {
+            MoveDirection = Vector3.zero;
+        }
         MoveDirection = transform.forward * InputVector.y + transform.right * InputVector.x;
 
         float currentSpeed = IsRunning ? RunSpeed : WalkSpeed;
@@ -113,6 +135,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce((transform.up + MoveDirection) * JumpForce, ForceMode.Impulse);
 
         IsJumping = true;
+        gameObject.GetComponent<AudioSource>().Pause();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -123,7 +146,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //GameObject.FindWithTag("SFX").GetComponent<AudioSource>().PlayOneShot(GameObject.FindWithTag("SFX").GetComponent<SFXManager>().landing);
-
+        GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(1);
+        gameObject.GetComponent<AudioSource>().Play();
         IsJumping = false;
         //playerAnimator.SetBool(IsJumpingHash, false);
     }
@@ -140,6 +164,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.tag == "VictoryCheckpoint")
         {
+            GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>().PlaySound(7);
             GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Victory();
         }
     }

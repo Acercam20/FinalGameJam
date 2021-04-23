@@ -9,6 +9,8 @@ TagManager:
   - KillZone
   - VictoryCheckpoint
   - RespawnCheckpoint
+  - MusicManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX
