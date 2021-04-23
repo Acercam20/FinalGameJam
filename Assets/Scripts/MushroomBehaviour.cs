@@ -5,6 +5,7 @@ using UnityEngine;
 public class MushroomBehaviour : MonoBehaviour
 {
     public bool gravUp;
+    public bool gravRev;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +24,16 @@ public class MushroomBehaviour : MonoBehaviour
         {
             if (gravUp)
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = 1.6f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = 1.7f;
+            }
+            else if (gravRev)
+            {
+                other.gameObject.GetComponent<PlayerController>().gravityScale = -0.6f;
+                other.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             else
             {
-                other.gameObject.GetComponent<PlayerController>().gravityScale = 0.4f;
+                other.gameObject.GetComponent<PlayerController>().gravityScale = 0.3f;
             }
         }
     }
