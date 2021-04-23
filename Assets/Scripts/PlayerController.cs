@@ -36,10 +36,6 @@ public class PlayerController : MonoBehaviour
     private InputAction inputAction1;
     ButtonControl jumpControl;
 
-    private InputAction inputAction2;
-    ButtonControl hookControl;
-
-    public GrapplingGun grappleHook;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -51,29 +47,14 @@ public class PlayerController : MonoBehaviour
         jumpControl = (ButtonControl)inputAction1.controls[0];
         inputAction1.Enable();
 
-        inputAction2 = asset.FindAction("Hook");
-        hookControl = (ButtonControl)inputAction2.controls[0];
-        inputAction2.Enable();
     }
 
     void Update()
     {
-        OnHook();
         Running();
         Movement();
     }
-    public void OnHook()
-    {
-        if (hookControl.wasPressedThisFrame)
-        {
-            grappleHook.StartGrapple();
-        }
-        if (hookControl.wasReleasedThisFrame)
-        {
-            grappleHook.StopGrapple();
-        }
-        
-    }
+
     private void Running()
     {
         if (jumpControl.wasPressedThisFrame)
@@ -145,6 +126,22 @@ public class PlayerController : MonoBehaviour
 
         IsJumping = false;
         //playerAnimator.SetBool(IsJumpingHash, false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "RespawnCheckpoint")
+        {
+            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().respawnPoint = other.gameObject;
+        }    
+        else if (other.gameObject.tag == "KillZone")
+        {
+            gameObject.transform.position = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().respawnPoint.transform.position;
+        }
+        else if (other.gameObject.tag == "VictoryCheckpoint")
+        {
+            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().Victory();
+        }
     }
 
 }

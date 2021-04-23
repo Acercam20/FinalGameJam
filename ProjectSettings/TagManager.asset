@@ -7,6 +7,8 @@ TagManager:
   - GameManager
   - Ground
   - KillZone
+  - VictoryCheckpoint
+  - RespawnCheckpoint
   layers:
   - Default
   - TransparentFX
